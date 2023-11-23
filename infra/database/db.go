@@ -48,7 +48,7 @@ func handleTableCreation() {
 	);
 	`
 
-	createTableQuery := fmt.Sprintf("%s", dataTable)
+	createTableQuery := fmt.Sprintf("%s ", dataTable)
 
 	_, err = db.Exec(createTableQuery)
 
