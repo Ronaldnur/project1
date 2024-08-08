@@ -1,2 +1,5 @@
 
-Yang Mengerjakan Project 1 adalah Ronald Nur Sunarto (GLNG-KS07-017)
+cara menggunakan project ini
+
+1. setelah di extract nama folder diubah menjadi Project1
+2. buka kode di VS-Code dan langsung go run main.go
