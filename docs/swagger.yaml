@@ -1,0 +1,149 @@
+definitions:
+  dto.NewTodosRequest:
+    properties:
+      completed:
+        type: boolean
+      title:
+        type: string
+    type: object
+  dto.NewTodosResponse:
+    properties:
+      message:
+        type: string
+      result:
+        type: string
+      status_code:
+        type: integer
+    type: object
+  dto.ReadDataByIdTodoResponse:
+    properties:
+      data:
+        $ref: '#/definitions/dto.TodoWithId'
+      message:
+        type: string
+      status_code:
+        type: integer
+    type: object
+  dto.ReadDataTodoResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/dto.TodoWithId'
+        type: array
+      message:
+        type: string
+      status_code:
+        type: integer
+    type: object
+  dto.TodoWithId:
+    properties:
+      completed:
+        type: boolean
+      id:
+        type: integer
+      title:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /todos:
+    get:
+      description: Get Todos Data
+      operationId: get-Todo-data
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ReadDataTodoResponse'
+      summary: Get Todos Data
+      tags:
+      - todos
+    post:
+      consumes:
+      - application/json
+      description: Create a new Todo item.
+      parameters:
+      - description: Todo request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.NewTodosRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.NewTodosResponse'
+      summary: Create a new Todo
+      tags:
+      - todos
+  /todos/{todoId}:
+    delete:
+      description: Delete a Todo by ID
+      operationId: delete-Todo-by-ID
+      parameters:
+      - description: Todo ID
+        in: path
+        name: todoId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+      summary: Delete Todo Data
+      tags:
+      - todos
+    get:
+      description: Get a Todo by ID
+      operationId: get-Todo-by-ID
+      parameters:
+      - description: Todo ID
+        in: path
+        name: todoId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ReadDataByIdTodoResponse'
+      summary: Get Todo Data by ID
+      tags:
+      - todos
+    put:
+      consumes:
+      - application/json
+      description: Update a Todo by ID
+      operationId: update-Todo-by-ID
+      parameters:
+      - description: Todo ID
+        in: path
+        name: todoId
+        required: true
+        type: integer
+      - description: Todo request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.NewTodosRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.NewTodosResponse'
+      summary: Update Todo Data
+      tags:
+      - todos
+swagger: "2.0"
